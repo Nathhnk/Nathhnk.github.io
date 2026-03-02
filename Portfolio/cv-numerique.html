@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV | HORNECKER Nathan</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #030712;
+            --card: #111827;
+            --accent: #4acfee;
+            --text: #f8fafc;
+            --text-dim: #94a3b8;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            padding-top: 50px;
+            padding-bottom: 50px;
+        }
+
+        .cv-container {
+            max-width: 900px;
+            background: var(--card);
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .sidebar {
+            background: rgba(74, 207, 238, 0.05);
+            padding: 40px;
+            border-right: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .main-content { padding: 40px; }
+
+        .profile-img {
+            width: 120px; height: 120px;
+            border-radius: 50%;
+            background: var(--accent);
+            margin-bottom: 20px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 3rem; font-weight: 800; color: var(--bg);
+        }
+
+        h1 { font-weight: 800; font-size: 2.2rem; margin-bottom: 5px; }
+        .job-title { color: var(--accent); font-weight: 600; margin-bottom: 30px; display: block; }
+        
+        h3 { font-size: 1.2rem; font-weight: 700; margin-top: 30px; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1px; }
+
+        .info-item { margin-bottom: 15px; font-size: 0.9rem; color: var(--text-dim); }
+        .info-item i { color: var(--accent); margin-right: 10px; }
+
+        .skill-badge {
+            display: inline-block;
+            padding: 5px 12px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 8px;
+            margin: 0 5px 10px 0;
+            font-size: 0.85rem;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .exp-item { margin-bottom: 25px; border-left: 2px solid var(--accent); padding-left: 20px; position: relative; }
+        .exp-item::before {
+            content: ''; position: absolute; left: -7px; top: 0;
+            width: 12px; height: 12px; border-radius: 50%; background: var(--accent);
+        }
+
+        .exp-date { font-size: 0.8rem; color: var(--accent); font-weight: 600; }
+        .exp-company { font-weight: 700; color: var(--text); display: block; }
+        .exp-desc { font-size: 0.9rem; color: var(--text-dim); margin-top: 5px; }
+
+        @media print {
+            .no-print { display: none; }
+            body { background: white; color: black; padding: 0; }
+            .cv-container { box-shadow: none; border: none; width: 100%; max-width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container d-flex justify-content-center">
+    <div class="cv-container">
+        <div class="row g-0">
+            <div class="col-md-4 sidebar">
+                
+                
+                <h3>Contact</h3>
+                <div class="info-item"><i class="bi bi-envelope"></i> nath.hnk@gmail.com</div>
+                <div class="info-item"><i class="bi bi-telephone"></i> 07 60 00 33 66</div>
+                <div class="info-item"><i class="bi bi-geo-alt"></i> Mertzwiller, 67580</div>
+                
+
+                <h3>Compétences</h3>
+                <div class="skill-badge">HTML5 / CSS3</div>
+                <div class="skill-badge">JavaScript</div>
+                <div class="skill-badge">PHP / MySQL</div>
+                <div class="skill-badge">Bootstrap</div>
+                <div class="skill-badge">Git / GitHub</div>
+
+                <h3>Langues</h3>
+                <div class="info-item">Français (Maternel)</div>
+                <div class="info-item">Anglais (B1)</div>
+                
+                <button onclick="window.print()" class="btn btn-outline-info btn-sm w-100 mt-5 no-print">
+                    <i class="bi bi-printer me-2"></i>Imprimer le CV
+                </button>
+            </div>
+
+            <div class="col-md-8 main-content">
+                <h1>Nathan <span class="text-info">HORNECKER</span></h1>
+                <span class="job-title">Étudiant en BTS SIO option SLAM</span>
+
+                <p class="text-secondary small">
+                    Passionné par le développement web et les nouvelles technologies, je prépare actuellement un diplôme spécialisé dans la conception d'applications. Rigoureux et curieux, je cherche à perfectionner mes compétences techniques au travers de projets concrets.
+                </p>
+
+                <h3><i class="bi bi-briefcase me-2 text-info"></i> Expériences</h3>
+                <div class="exp-item">
+                    <span class="exp-date">2024 (5 semaines)</span>
+                    <span class="exp-company">Stage Développeur Web | IFCE STRASBOURG</span>
+                    <p class="exp-desc">Conception d'une landing page dynamique et mise en place d'une base de données pour la gestion de contenu.</p>
+                </div>
+
+                <h3><i class="bi bi-mortarboard me-2 text-info"></i> Formation</h3>
+                <div class="exp-item">
+                    <span class="exp-date">2024 - 2026</span>
+                    <span class="exp-company">BTS SIO SLAM | Lycée René Cassin</span>
+                    <p class="exp-desc">Services Informatiques aux Organisations - Spécialité Solutions Logicielles et Applications Métiers.</p>
+                </div>
+                <div class="exp-item">
+                    <span class="exp-date">2021 - 2024</span>
+                    <span class="exp-company">Baccalauréat STI2D SIN | Lycée Marc Bloch</span>
+                    <p class="exp-desc">Sciences et Technologies de l'Industrie et du Développement Durable - Option Système d'Information et Numérique.</p>
+                </div>
+
+                <h3><i class="bi bi-controller me-2 text-info"></i> Centres d'intérêt</h3>
+                <div class="d-flex gap-3 text-secondary small">
+                    <span><i class="bi bi-pc-display"></i> Informatique</span>
+                    <span><i class="bi bi-joystick"></i> Jeux Vidéo</span>
+                    <span><i class="bi bi-bicycle"></i> Sport</span>
+                </div>
+
+                <div class="mt-5 no-print">
+                    <a href="projets.html" class="text-info text-decoration-none small">
+                        <i class="bi bi-arrow-left"></i> Retour aux projets
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

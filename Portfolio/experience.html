@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HORNECKER Nathan | Expérience</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --accent-color: #4acfee;
+            --secondary-accent: #0d6efd;
+            --glass-bg: rgba(15, 23, 42, 0.7);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            --text-dim: #94a3b8;
+            --text-main: #f8fafc;
+            /* Ajout des variables manquantes pour que le CSS fonctionne */
+            --accent: #4acfee;
+            --border: rgba(255, 255, 255, 0.1);
+            --accent-glow: rgba(74, 207, 238, 0.4);
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #030712;
+            color: #e2e8f0;
+            overflow-x: hidden;
+        }
+
+        #canvas-bg {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1;
+            background: radial-gradient(circle at center, #111827 0%, #030712 100%);
+        }
+
+        /* --- NAVBAR ULTIMATE (FIXED) --- */
+        .navbar {
+            background: rgba(3, 7, 18, 0.7) !important;
+            backdrop-filter: blur(20px) saturate(180%);
+            border-bottom: 1px solid var(--border);
+            padding: 18px 0;
+        }
+
+        .custom-link {
+            color: var(--text-dim) !important;
+            font-weight: 600;
+            position: relative;
+            transition: var(--transition);
+            text-decoration: none;
+        }
+
+        /* Trait bleu sous les liens */
+        .custom-link::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            width: 0;
+            height: 3px;
+            background: var(--accent);
+            transition: var(--transition);
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        .custom-link:hover {
+            color: var(--text-main) !important;
+        }
+
+        .custom-link:hover::after {
+            width: 15px;
+        }
+
+        /* Élément actif : Garde la couleur d'origine mais affiche le trait */
+        .nav-active-fix {
+            color: var(--text-dim) !important;
+        }
+
+        .nav-active-fix::after {
+            width: 15px !important;
+        }
+
+        /* Suppression de la flèche Bootstrap */
+        .dropdown-toggle::after {
+            display: none !important;
+        }
+
+        .dropdown-menu {
+            background: rgba(17, 24, 39, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--accent-glow);
+            border-radius: 12px;
+            margin-top: 10px;
+        }
+
+        .dropdown-item { color: #f8fafc; padding: 10px 20px; transition: 0.3s; }
+        .dropdown-item:hover { background: rgba(74, 207, 238, 0.15); color: var(--accent); }
+        /* --- Experience Styles --- */
+        .text-glow {
+            color: var(--accent-color);
+            text-shadow: 0 0 20px rgba(74, 207, 238, 0.4);
+        }
+
+        .timeline-container {
+            position: relative;
+            padding: 60px 0;
+        }
+
+        .timeline-container::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(to bottom, transparent, var(--accent-color), var(--secondary-accent), transparent);
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            margin-bottom: 100px;
+            position: relative;
+            width: 100%;
+            display: flex;
+            justify-content: flex-start;
+        }
+
+        .timeline-item:nth-child(even) {
+            justify-content: flex-end;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: 50%;
+            top: 30px;
+            width: 24px;
+            height: 24px;
+            background: #030712;
+            border: 4px solid var(--accent-color);
+            border-radius: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            box-shadow: 0 0 20px var(--accent-color);
+            transition: all 0.3s ease;
+        }
+
+        .timeline-item:hover .timeline-dot {
+            transform: translateX(-50%) scale(1.3);
+            background: var(--accent-color);
+        }
+
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease;
+            width: 45%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            border-color: rgba(74, 207, 238, 0.3);
+        }
+
+        .badge-tech {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #e2e8f0;
+            padding: 8px 14px;
+            border-radius: 10px;
+            font-size: 0.85rem;
+            transition: 0.2s;
+        }
+
+        .badge-tech:hover {
+            background: rgba(74, 207, 238, 0.1);
+            border-color: var(--accent-color);
+            color: var(--accent-color);
+        }
+
+        .shadow-cyan { box-shadow: 0 0 20px rgba(74, 207, 238, 0.4); }
+
+        @media (max-width: 768px) {
+            .timeline-container::before { left: 20px; transform: none; }
+            .timeline-dot { left: 20px; transform: none; }
+            .timeline-item, .timeline-item:nth-child(even) { justify-content: flex-start; }
+            .glass-card { 
+                width: calc(100% - 60px); 
+                margin-left: 60px !important; 
+                padding: 25px !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<canvas id="canvas-bg"></canvas>
+
+<nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container">
+        <a class="navbar-brand fw-bold fs-3 text-white" href="index.html">
+            N<span class="text-info">.</span>HORNECKER
+        </a>
+        <button class="navbar-toggler border-info" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <i class="bi bi-list text-info"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto gap-4 align-items-center">
+                <li><a class="nav-link custom-link" href="index.html">Accueil</a></li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link custom-link nav-active-fix" href="#" role="button" data-bs-toggle="dropdown">
+                        À propos de moi
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="info-perso.html">Informations personnelles</a></li>
+                        <li><a class="dropdown-item" href="competences.html">Compétences</a></li>
+                    </ul>
+                </li>
+                <li><a class="nav-link custom-link" href="experience.html">Stage</a></li>
+                <li><a class="nav-link custom-link" href="projets.html">Projets</a></li>
+                <li><a class="nav-link custom-link" href="veilles.html">veilles technologique</a></li>
+                <li><a href="contact.html" class="btn btn-info rounded-pill px-4 shadow-cyan fw-bold text-dark" style="background-color: #4acfee !important; border:none;">Contact</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<main class="container py-5 mt-5">
+    <div class="text-center mb-5 pb-4 mt-5" data-aos="fade-down">
+        <h1 class="display-2 fw-800 text-white mb-3">
+            Mon <span class="text-glow">Parcours</span>
+        </h1>
+    </div>
+
+    <div class="timeline-container">
+        <div class="timeline-item" data-aos="fade-right">
+            <div class="timeline-dot"></div>
+            <div class="glass-card p-5 border-start border-info border-4">
+                <div class="d-flex justify-content-between align-items-start mb-4">
+                    <div>
+                        <h3 class="fw-bold text-white mb-1">IFCE Strasbourg</h3>
+                    </div>
+                </div>
+
+                <div class="mb-4 text-secondary-emphasis small">
+                    <i class="bi bi-calendar3 me-2"></i> Mai 2025 – Juin 2025
+                    <span class="mx-2 text-muted">|</span>
+                    <i class="bi bi-geo-alt me-2"></i> Strasbourg
+                </div>
+
+                <div class="text-secondary mb-4">
+                    <p class="mb-4" style="font-size: 0.95rem;"><strong>Création intégrale :</strong> d'un site 100% dynamique pilotée par base de données.</p>
+                    <ul class="list-unstyled">
+                        <li class="mb-3 d-flex align-items-start">
+                            <i class="bi bi-database-check text-info me-3 mt-1"></i>
+                            <span><strong>Architecture Dynamique :</strong> Gestion du contenu via les tables <em>sections</em> et <em>pages_sections</em>. Routage intelligent basé sur les slugs (page.php).</span>
+                        </li>
+                        <li class="mb-3 d-flex align-items-start">
+                            <i class="bi bi-code-slash text-info me-3 mt-1"></i>
+                            <span><strong>Composants Avancés :</strong> Développement d'un carrousel de formations (PHP/JS) avec tri dynamique par niveau (Bac+2 à Bac+5) et défilement tactile.</span>
+                        </li>
+                        <li class="mb-3 d-flex align-items-start">
+                            <i class="bi bi-shield-lock text-info me-3 mt-1"></i>
+                            <span><strong>Sécurité & Flux :</strong> Intégration API Brevo (e-mails transactionnels avec PDF), reCAPTCHA v2 et système sécurisé d'upload de CV (PDF ≤ 5 Mo).</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="pt-3 border-top border-secondary border-opacity-25">
+                    <div class="d-flex gap-2 flex-wrap">
+                        <span class="badge-tech">PHP 7.4</span>
+                        <span class="badge-tech">MariaDB (XAMPP/Linux)</span>
+                        <span class="badge-tech">Apache2</span>
+                        <span class="badge-tech">API Brevo</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="timeline-item" data-aos="fade-left">
+            <div class="timeline-dot" style="border-color: var(--secondary-accent); box-shadow: 0 0 20px var(--secondary-accent);"></div>
+            <div class="glass-card p-5 border-start border-primary border-4">
+                <div class="d-flex justify-content-between align-items-start mb-4">
+                    <div>
+                        <h3 class="fw-bold text-white mb-1">SNIC SIGNALISATION</h3>
+                    </div>
+                </div>
+
+                <div class="mb-4 text-secondary-emphasis small">
+                    <i class="bi bi-calendar3 me-2"></i> Janvier 2026 – Février 2026
+                    <span class="mx-2 text-muted">|</span>
+                    <i class="bi bi-geo-alt me-2"></i> Reichshoffen
+                </div>
+
+                <div class="text-secondary mb-4">
+                    <p class="mb-4" style="font-size: 0.95rem;">Conception intégrale d'un écosystème de gestion d'ordres de mission avec authentification multi-niveaux.</p>
+                    <ul class="list-unstyled">
+                        <li class="mb-3 d-flex align-items-start">
+                            <i class="bi bi-fingerprint text-primary me-3 mt-1"></i>
+                            <span><strong>Identité & Accès :</strong> Système de gestion des rôles (RBAC) et sécurisation des sessions par <strong>Tokens éphémères</strong>.</span>
+                        </li>
+                        <li class="mb-3 d-flex align-items-start">
+                            <i class="bi bi-file-earmark-pdf text-primary me-3 mt-1"></i>
+                            <span><strong>Dématérialisation :</strong> Signature électronique sur Canvas HTML5 et génération dynamique de rapports <strong>PDF (Dompdf)</strong>.</span>
+                        </li>
+                        <li class="mb-3 d-flex align-items-start">
+                            <i class="bi bi-terminal text-primary me-3 mt-1"></i>
+                            <span><strong>Infrastructure :</strong> Administration système via <strong>Webmin</strong>, gestion de VM et versioning sous <strong>GitLab</strong>.</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="pt-3 border-top border-secondary border-opacity-25">
+                    <div class="d-flex gap-2 flex-wrap">
+                        <span class="badge-tech">PHP / PDO</span>
+                        <span class="badge-tech">JS Canvas</span>
+                        <span class="badge-tech">Linux</span>
+                        <span class="badge-tech">GitLab CI</span>
+                        <span class="badge-tech">Dompdf</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<footer class="container py-5 mt-5 border-top border-secondary opacity-50">
+    <div class="row">
+        <div class="col-md-6 small text-white">© 2026 HORNECKER Nathan // BTS SIO SLAM</div>
+        <div class="col-md-6 text-md-end">
+            <a href="#" class="text-decoration-none text-light me-3"><i class="bi bi-github"></i></a>
+            <a href="#" class="text-decoration-none text-light"><i class="bi bi-linkedin"></i></a>
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    AOS.init({ duration: 800, once: true });
+
+    const canvas = document.querySelector('#canvas-bg');
+    const renderer = new THREE.WebGLRenderer({ canvas, alpha: true });
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    camera.position.z = 5;
+
+    const particlesGeometry = new THREE.BufferGeometry();
+    const count = 3000;
+    const positions = new Float32Array(count * 3);
+    for(let i = 0; i < count * 3; i++) { positions[i] = (Math.random() - 0.5) * 15; }
+    particlesGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+    const material = new THREE.PointsMaterial({ size: 0.02, color: 0x4acfee });
+    const points = new THREE.Points(particlesGeometry, material);
+    scene.add(points);
+
+    function animate() {
+        requestAnimationFrame(animate);
+        points.rotation.y += 0.0005;
+        renderer.render(scene, camera);
+    }
+
+    window.addEventListener('resize', () => {
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+    });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    animate();
+</script>
+</body>
+</html>

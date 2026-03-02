@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projets | HORNECKER Nathan</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+    <style>
+        #canvas-bg {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1; /* Derrière tout */
+            background: radial-gradient(circle at center, #111827 0%, #030712 100%);
+            pointer-events: none; /* TRÈS IMPORTANT : permet de cliquer à travers le canvas */
+        }
+        
+        /* On s'assure que le contenu est bien au-dessus */
+        nav, main, footer {
+            position: relative;
+            z-index: 10;
+        }
+
+        .project-card-premium {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            z-index: 20; /* Force la carte à être devant */
+        }
+        
+        /* Style pour que le lien ressemble vraiment à un bouton cliquable */
+        .btn {
+            position: relative;
+            z-index: 30;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+<canvas id="canvas-bg"></canvas>
+
+<nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container">
+        <a class="navbar-brand fw-bold fs-3 text-white" href="index.html">
+            N<span class="text-info">.</span>HORNECKER
+        </a>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto gap-3 align-items-center">
+                <li><a class="nav-link custom-link" href="index.html">Accueil</a></li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link custom-link dropdown-toggle" href="#" data-bs-toggle="dropdown">À propos</a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="info-perso.html">Informations</a></li>
+                        <li><a class="dropdown-item" href="competences.html">Compétences</a></li>
+                    </ul>
+                </li>
+                <li><a class="nav-link custom-link nav-active-fix" href="projets.html">Projets</a></li>
+                <li><a class="nav-link custom-link" href="veilles.html">Veille</a></li>
+                <li><a href="contact.html" class="btn btn-info rounded-pill px-4 shadow-cyan">Contact</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<main class="container py-5 mt-5">
+    <div class="text-center mb-5 pt-5" data-aos="fade-down">
+        <h1 class="display-3 fw-800 text-white">Mes <span class="text-glow">Projets</span></h1>
+        <p class="text-secondary fs-5">Travaux réalisés en autonomie et durant ma formation.</p>
+    </div>
+
+    <div class="row g-4">
+        <div class="col-lg-12" data-aos="fade-up">
+            <div class="project-card-premium">
+                <div class="row align-items-center p-3">
+                    <div class="col-md-8">
+                        <div class="icon-wrapper"><i class="bi bi-display"></i></div>
+                        <h3 class="text-white fw-bold">Portfolio Professionnel</h3>
+                        <p class="text-info small fw-bold">Site Vitrine</p>
+                        <p class="text-secondary">
+                            Création de mon site personnel pour présenter mon parcours. Utilisation de Bootstrap et Three.js.
+                        </p>
+                        <div class="mb-4">
+                            <span class="badge-tech-v2">HTML / CSS</span>
+                            <span class="badge-tech-v2">JS</span>
+                            <span class="badge-tech-v2">Bootstrap</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+            <div class="project-card-premium">
+                <div>
+                    <div class="icon-wrapper"><i class="bi bi-file-earmark-person"></i></div>
+                    <h3 class="text-white fw-bold">CV Numérique</h3>
+                    <p class="text-info small fw-bold">Site Statique</p>
+                    <p class="text-secondary">
+                        Réalisation d'un CV interactif codé entièrement en HTML et CSS.
+                    </p>
+                </div>
+                <div class="mt-4">
+                    <div class="mb-4">
+                        <span class="badge-tech-v2">HTML5</span>
+                        <span class="badge-tech-v2">CSS3</span>
+                        <span class="badge-tech-v2">JavaScript</span>
+                    </div>
+                    <a href="cv-numerique.html" class="btn btn-outline-info rounded-pill w-100 fw-bold">Voir le CV</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
+            <div class="project-card-premium">
+                <div>
+                    <div class="icon-wrapper"><i class="bi bi-patch-question"></i></div>
+                    <h3 class="text-white fw-bold">Quiz Interactif</h3>
+                    <p class="text-info small fw-bold">Logique JavaScript</p>
+                    <p class="text-secondary">
+                        Petit jeu de questions-réponses développé en JavaScript.
+                    </p>
+                </div>
+                <div class="mt-4">
+                    <div class="mb-4">
+                        <span class="badge-tech-v2">JavaScript</span>
+                        <span class="badge-tech-v2">Interface Dynamique</span>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<footer class="text-center py-5 mt-5 border-top border-secondary opacity-50">
+    <p class="small text-white">© 2026 HORNECKER Nathan // BTS SIO SLAM</p>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    AOS.init({ duration: 800, once: true });
+    // Script Three.js conservé (identique au tien)
+    const canvas = document.querySelector('#canvas-bg');
+    const renderer = new THREE.WebGLRenderer({ canvas, alpha: true });
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    camera.position.z = 5;
+    const particlesGeometry = new THREE.BufferGeometry();
+    const count = 5000;
+    const positions = new Float32Array(count * 3);
+    for(let i=0; i<count*3; i++) positions[i] = (Math.random() - 0.5) * 15;
+    particlesGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+    const material = new THREE.PointsMaterial({ size: 0.015, color: 0x4acfee });
+    const points = new THREE.Points(particlesGeometry, material);
+    scene.add(points);
+    function animate() {
+        requestAnimationFrame(animate);
+        points.rotation.y += 0.001;
+        renderer.render(scene, camera);
+    }
+    window.addEventListener('resize', () => {
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+    });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    animate();
+</script>
+</body>
+</html>

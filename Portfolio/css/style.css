@@ -1,0 +1,328 @@
+/* ==========================================================================
+   CONFIG & DESIGN SYSTEM
+   ========================================================================== */
+:root {
+    --bg-dark: #030712;
+    --accent: #4acfee;
+    --accent-glow: rgba(74, 207, 238, 0.4);
+    --glass: rgba(255, 255, 255, 0.03);
+    --glass-heavy: rgba(255, 255, 255, 0.07);
+    --border: rgba(255, 255, 255, 0.1);
+    --text-main: #f8fafc;
+    --text-dim: #94a3b8;
+    --transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+body {
+    background-color: var(--bg-dark);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    color: var(--text-main);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* ==========================================================================
+   NAVBAR ULTIMATE
+   ========================================================================== */
+.navbar {
+    background: rgba(3, 7, 18, 0.7) !important;
+    backdrop-filter: blur(20px) saturate(180%);
+    border-bottom: 1px solid var(--border);
+    padding: 18px 0;
+    transition: var(--transition);
+}
+
+.custom-link {
+    color: var(--text-dim) !important;
+    font-weight: 600;
+    font-size: 0.95rem;
+    letter-spacing: 0.5px;
+    position: relative;
+    transition: var(--transition);
+}
+
+.custom-link::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: var(--accent);
+    transition: var(--transition);
+    transform: translateX(-50%);
+}
+
+.custom-link:hover {
+    color: var(--accent) !important;
+}
+
+.custom-link:hover::after {
+    width: 20px;
+}
+
+/* ==========================================================================
+   COMPOSANTS GRAPHIC (GLOW & GLASS)
+   ========================================================================== */
+.text-glow {
+    color: var(--accent);
+    text-shadow: 0 0 25px var(--accent-glow);
+    font-weight: 800;
+}
+
+.shadow-cyan {
+    box-shadow: 0 0 20px rgba(74, 207, 238, 0.2);
+}
+
+/* ==========================================================================
+   PROJECT CARDS (PREMIUM SLAM VERSION)
+   ========================================================================== */
+.project-card-premium {
+    background: linear-gradient(165deg, var(--glass-heavy) 0%, rgba(255,255,255,0.01) 100%);
+    border: 1px solid var(--border);
+    border-radius: 32px;
+    padding: 45px;
+    position: relative;
+    overflow: hidden;
+    transition: var(--transition);
+    height: 100%;
+}
+
+.project-card-premium::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at top right, rgba(74, 207, 238, 0.12), transparent 60%);
+    opacity: 0;
+    transition: var(--transition);
+}
+
+.project-card-premium:hover {
+    transform: translateY(-12px) scale(1.02);
+    border-color: rgba(74, 207, 238, 0.5);
+    box-shadow: 0 40px 80px rgba(0,0,0,0.6), 0 0 30px rgba(74, 207, 238, 0.1);
+}
+
+.project-card-premium:hover::before {
+    opacity: 1;
+}
+
+/* Icon Animation Spéciale */
+.icon-wrapper {
+    width: 65px;
+    height: 65px;
+    background: rgba(74, 207, 238, 0.08);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent);
+    font-size: 2rem;
+    border: 1px solid rgba(74, 207, 238, 0.2);
+    transition: var(--transition);
+    margin-bottom: 25px;
+}
+
+.project-card-premium:hover .icon-wrapper {
+    background: var(--accent);
+    color: #020617;
+    transform: rotate(-12deg) scale(1.1);
+    box-shadow: 0 10px 25px var(--accent-glow);
+}
+
+/* ==========================================================================
+   BADGES & TAGS
+   ========================================================================== */
+.badge-tech-v2 {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    color: var(--text-dim);
+    padding: 8px 18px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: var(--transition);
+}
+
+.project-card-premium:hover .badge-tech-v2 {
+    background: rgba(74, 207, 238, 0.12);
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+/* ==========================================================================
+   ANIMATIONS & UTILS
+   ========================================================================== */
+.floating-anim {
+    animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0) rotate(0); }
+    50% { transform: translateY(-20px) rotate(1deg); }
+}
+
+.status-tag.pulse {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(74, 222, 128, 0.1);
+    border: 1px solid rgba(74, 222, 128, 0.2);
+    padding: 5px 15px;
+    border-radius: 50px;
+    color: #4ade80;
+    font-size: 0.75rem;
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    background: #4ade80;
+    border-radius: 50%;
+    box-shadow: 0 0 15px #4ade80;
+    animation: blink 2s infinite ease-in-out;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 0.3; transform: scale(0.8); }
+    50% { opacity: 1; transform: scale(1.1); }
+}
+
+/* Scrollbar Custom */
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-track {
+    background: var(--bg-dark);
+}
+::-webkit-scrollbar-thumb {
+    background: var(--border);
+    border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: var(--accent);
+}
+/* --- CONFIGURATION DES COURBES --- */
+:root {
+    --round-lg: 40px;
+    --round-md: 20px;
+    --round-pill: 50px;
+    --accent-soft: rgba(74, 207, 238, 0.2);
+}
+
+/* --- TITRE ET TEXTE --- */
+.main-title {
+    font-size: clamp(3rem, 6vw, 5rem);
+    font-weight: 800;
+    letter-spacing: -2px;
+    line-height: 1;
+}
+
+.text-glow-soft {
+    background: linear-gradient(135deg, #4acfee, #53f8c9);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 0 15px rgba(74, 207, 238, 0.3));
+}
+
+/* --- LE BADGE "PILL" --- */
+.pill-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 8px 20px;
+    border-radius: var(--round-pill);
+    color: #94a3b8;
+    font-weight: 600;
+    font-size: 0.85rem;
+}
+
+.pill-dot {
+    width: 8px;
+    height: 8px;
+    background: #4ade80;
+    border-radius: 50%;
+    box-shadow: 0 0 10px #4ade80;
+}
+
+/* --- LA CARTE ARRONDIE (GLASS SPHERE) --- */
+.glass-sphere-card {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--round-lg); /* Bordures très arrondies */
+    padding: 50px;
+    position: relative;
+    box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+    transition: all 0.5s ease;
+}
+
+.glow-aura {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 200px; height: 200px;
+    background: radial-gradient(circle, var(--accent-soft) 0%, transparent 70%);
+    z-index: -1;
+}
+
+.profile-circle {
+    width: 150px; height: 150px;
+    margin: 0 auto;
+    border-radius: 50%; /* Image parfaitement ronde */
+    padding: 5px;
+    background: linear-gradient(135deg, #4acfee, transparent);
+}
+
+.profile-circle img {
+    border-radius: 50%;
+    width: 100%; height: 100%;
+    object-fit: cover;
+}
+
+/* --- BOUTONS ARRONDIS --- */
+.btn-modern-primary {
+    background: #fff;
+    color: #030712;
+    padding: 15px 35px;
+    border-radius: var(--round-pill);
+    font-weight: 700;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.btn-modern-primary:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 25px rgba(255,255,255,0.2);
+}
+
+.btn-modern-outline {
+    border: 1px solid rgba(255,255,255,0.1);
+    color: #fff;
+    padding: 15px 35px;
+    border-radius: var(--round-pill);
+    font-weight: 600;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.btn-modern-outline:hover {
+    background: rgba(255,255,255,0.05);
+}
+
+/* --- SKILL PILLS --- */
+.skill-pill {
+    background: rgba(74, 207, 238, 0.1);
+    color: #4acfee;
+    padding: 6px 15px;
+    border-radius: var(--round-pill);
+    font-size: 0.75rem;
+    font-weight: 700;
+    margin: 3px;
+    display: inline-block;
+}
+
