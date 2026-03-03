@@ -71,18 +71,17 @@
             color: var(--text-main) !important;
         }
 
-        /* Effet au survol : le trait s'agrandit pour les autres liens */
         .custom-link:hover::after {
             width: 15px;
         }
 
-        /* CETTE CLASSE EST FIXE POUR INDIQUER LE MENU DÉROULANT */
+        /* CLASSE FIXE : Le trait reste affiché ici */
         .nav-active-fix {
-            color: var(--text-dim) !important; /* On garde la couleur normale */
+            color: var(--text-dim) !important;
         }
 
         .nav-active-fix::after {
-            width: 15px !important; /* Le trait reste affiché en permanence */
+            width: 15px !important;
         }
 
         .dropdown-toggle::after {
