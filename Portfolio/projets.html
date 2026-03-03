@@ -36,7 +36,7 @@
             pointer-events: none;
         }
 
-        /* --- NAVBAR (COPIE STRICTE PAGE 1) --- */
+        /* --- NAVBAR --- */
         .navbar {
             background: rgba(3, 7, 18, 0.7) !important;
             backdrop-filter: blur(20px) saturate(180%);
@@ -63,6 +63,7 @@
             transition: var(--transition);
             transform: translateX(-50%);
             border-radius: 2px;
+            opacity: 0; /* Caché par défaut */
         }
 
         .custom-link:hover {
@@ -71,14 +72,18 @@
 
         .custom-link:hover::after {
             width: 15px;
+            opacity: 1;
         }
 
+        /* FORCE L'AFFICHAGE DU TRAIT (Même sans survol) */
         .nav-active-fix {
-            color: var(--text-dim) !important;
+            color: var(--text-dim) !important; 
         }
 
         .nav-active-fix::after {
             width: 15px !important;
+            opacity: 1 !important; /* Force la visibilité */
+            background: var(--accent) !important;
         }
 
         .dropdown-toggle::after {
@@ -104,7 +109,9 @@
             color: var(--accent);
         }
 
-        /* --- PROJETS --- */
+        .shadow-cyan { box-shadow: 0 0 20px rgba(74, 207, 238, 0.4); }
+
+        /* --- PROJETS STYLES --- */
         .project-card-premium {
             background: linear-gradient(165deg, rgba(255,255,255,0.07), rgba(255,255,255,0.01));
             border: 1px solid var(--border);
@@ -184,8 +191,8 @@
                 <li><a class="nav-link custom-link" href="veilles.html">veilles technologique</a></li>
 
                 <li>
-                    <a href="contact.html" class="btn btn-info rounded-pill px-4 fw-bold text-dark"
-                       style="background-color:#4acfee;border:none;">
+                    <a href="contact.html" class="btn btn-info rounded-pill px-4 shadow-cyan fw-bold text-dark"
+                       style="background-color: #4acfee !important; border:none;">
                         Contact
                     </a>
                 </li>
@@ -230,7 +237,7 @@
     const canvas = document.querySelector('#canvas-bg');
     const renderer = new THREE.WebGLRenderer({ canvas, alpha: true });
     const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(75, innerWidth / innerHeight, 0.1, 1000);
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
     camera.position.z = 5;
 
     const geometry = new THREE.BufferGeometry();
@@ -249,7 +256,13 @@
         renderer.render(scene, camera);
     }
 
-    renderer.setSize(innerWidth, innerHeight);
+    window.addEventListener('resize', () => {
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+    });
+
+    renderer.setSize(window.innerWidth, window.innerHeight);
     animate();
 </script>
 
