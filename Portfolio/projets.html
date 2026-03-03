@@ -54,6 +54,7 @@
             text-decoration: none;
         }
 
+        /* Le trait de base (caché par défaut) */
         .custom-link::after {
             content: '';
             position: absolute;
@@ -75,13 +76,16 @@
             width: 15px;
         }
 
-        /* Le trait reste affiché sous l'élément avec cette classe */
-        .nav-active-fix {
-            color: var(--text-dim) !important;
-        }
-
+        /* --- LA CORRECTION ICI --- */
+        /* Cette classe force le trait à rester visible sous "À propos de moi" */
         .nav-active-fix::after {
             width: 15px !important;
+            background: var(--accent) !important;
+        }
+        
+        /* On s'assure que le texte est aussi un peu plus clair */
+        .nav-active-fix {
+            color: var(--text-main) !important;
         }
 
         .dropdown-toggle::after {
@@ -99,7 +103,7 @@
         .dropdown-item { color: #f8fafc; padding: 10px 20px; transition: 0.3s; }
         .dropdown-item:hover { background: rgba(74, 207, 238, 0.15); color: var(--accent); }
 
-        /* --- CARDS PROJETS --- */
+        /* --- CARDS --- */
         .project-card-premium {
             background: linear-gradient(165deg, var(--glass-heavy) 0%, rgba(255,255,255,0.01) 100%);
             border: 1px solid var(--border);
@@ -169,6 +173,7 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto gap-4 align-items-center">
                 <li><a class="nav-link custom-link" href="index.html">Accueil</a></li>
+                
                 <li class="nav-item dropdown">
                     <a class="nav-link custom-link dropdown-toggle nav-active-fix" href="#" role="button" data-bs-toggle="dropdown">
                         À propos de moi
@@ -178,8 +183,11 @@
                         <li><a class="dropdown-item" href="competences.html">Compétences</a></li>
                     </ul>
                 </li>
+
                 <li><a class="nav-link custom-link" href="experience.html">Stage</a></li>
+                
                 <li><a class="nav-link custom-link" href="projets.html">Projets</a></li>
+                
                 <li><a class="nav-link custom-link" href="veilles.html">veilles technologique</a></li>
                 <li><a href="contact.html" class="btn btn-info rounded-pill px-4 shadow-cyan fw-bold text-dark" style="background-color: #4acfee !important; border:none;">Contact</a></li>
             </ul>
