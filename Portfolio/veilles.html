@@ -8,16 +8,84 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
 
     <style>
+        :root {
+            --accent-color: #4acfee;
+            --secondary-accent: #0d6efd;
+            --glass-bg: rgba(15, 23, 42, 0.7);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            --text-dim: #94a3b8;
+            --text-main: #f8fafc;
+            --accent: #4acfee;
+            --border: rgba(255, 255, 255, 0.1);
+            --accent-glow: rgba(74, 207, 238, 0.4);
+            --glass: rgba(255, 255, 255, 0.03);
+        }
+
         #canvas-bg {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            z-index: -1;
+            z-index: -1; 
             background: radial-gradient(circle at center, #111827 0%, #030712 100%);
+            pointer-events: none; /* Empêche le fond de bloquer les clics sur les liens */
         }
+
+        /* --- NAVBAR --- */
+        .navbar {
+            background: rgba(3, 7, 18, 0.7) !important;
+            backdrop-filter: blur(20px) saturate(180%);
+            border-bottom: 1px solid var(--border);
+            padding: 18px 0;
+            z-index: 1050;
+        }
+
+        .custom-link {
+            color: var(--text-dim) !important;
+            font-weight: 600;
+            position: relative;
+            transition: var(--transition);
+            text-decoration: none;
+        }
+
+        .custom-link::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            width: 0;
+            height: 3px;
+            background: var(--accent);
+            transition: var(--transition);
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        .custom-link:hover { color: var(--text-main) !important; }
+        .custom-link:hover::after { width: 15px; }
+
+        .nav-active-fix { color: var(--text-main) !important; }
+        .nav-active-fix::after { width: 15px !important; }
+
+        .dropdown-menu {
+            background: rgba(17, 24, 39, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--accent-glow);
+            border-radius: 12px;
+            margin-top: 10px;
+        }
+
+        .dropdown-item { color: #f8fafc; padding: 10px 20px; transition: 0.3s; }
+        .dropdown-item:hover { background: rgba(74, 207, 238, 0.15); color: var(--accent); }
+
+        /* --- STYLE CONTENU --- */
+        .text-glow {
+            color: var(--accent-color);
+            text-shadow: 0 0 20px rgba(74, 207, 238, 0.4);
+        }
+
         .step-card {
             background: var(--glass);
             border-left: 4px solid var(--accent);
@@ -26,9 +94,7 @@
             height: 100%;
             transition: var(--transition);
         }
-        .step-card:hover { background: rgba(255, 255, 255, 0.08); }
-        
-        /* Correction des liens pour qu'ils soient bien visibles et cliquables */
+
         .source-tag {
             display: inline-block;
             background: rgba(74, 207, 238, 0.1);
@@ -40,21 +106,46 @@
             text-decoration: none !important;
             border: 1px solid var(--accent);
             transition: 0.3s;
-            cursor: pointer;
+            position: relative;
+            z-index: 10; 
         }
+        
         .source-tag:hover { 
             background: var(--accent); 
             color: #000 !important;
             transform: translateY(-2px);
         }
-        
-        .dashboard-mockup {
-            border: 1px solid var(--border);
-            border-radius: 15px;
-            background: #0f172a;
-            overflow: hidden;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 30px;
         }
+
+        .project-card-premium {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 30px;
+            transition: var(--transition);
+            position: relative;
+        }
+        
+        .project-card-premium:hover {
+            background: rgba(255, 255, 255, 0.06);
+            border-color: var(--accent);
+            transform: translateY(-5px);
+        }
+
+        .icon-wrapper {
+            font-size: 2rem;
+            color: var(--accent);
+            margin-bottom: 20px;
+        }
+
+        .shadow-cyan { box-shadow: 0 0 20px rgba(74, 207, 238, 0.4); }
     </style>
 </head>
 <body>
@@ -66,12 +157,25 @@
         <a class="navbar-brand fw-bold fs-3 text-white" href="index.html">
             N<span class="text-info">.</span>HORNECKER
         </a>
+        <button class="navbar-toggler border-info" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <i class="bi bi-list text-info"></i>
+        </button>
         <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ms-auto gap-3 align-items-center">
+            <ul class="navbar-nav ms-auto gap-4 align-items-center">
                 <li><a class="nav-link custom-link" href="index.html">Accueil</a></li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link custom-link" href="#" role="button" data-bs-toggle="dropdown">
+                        À propos de moi
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="info-perso.html">Informations personnelles</a></li>
+                        <li><a class="dropdown-item" href="competences.html">Compétences</a></li>
+                    </ul>
+                </li>
+                <li><a class="nav-link custom-link" href="experience.html">Stage</a></li>
                 <li><a class="nav-link custom-link" href="projets.html">Projets</a></li>
-                <li><a class="nav-link custom-link active" href="veilles.html">Veille</a></li>
-                <li><a href="contact.html" class="btn btn-info rounded-pill px-4 shadow-cyan">Contact</a></li>
+                <li><a class="nav-link custom-link nav-active-fix" href="veilles.html">Veille Technologique</a></li>
+                <li><a href="contact.html" class="btn btn-info rounded-pill px-4 shadow-cyan fw-bold text-dark" style="background-color: #4acfee !important; border:none;">Contact</a></li>
             </ul>
         </div>
     </div>
@@ -87,10 +191,10 @@
     <section class="mb-5" data-aos="fade-up">
         <div class="row">
             <div class="col-lg-10 mx-auto">
-                <h2 class="text-white mb-4"><span class="text-info">01.</span> Qu'est-ce que la veille technologique ?</h2>
-                <div class="glass-card p-4">
+                <h2 class="text-white mb-4"><span class="text-info">01.</span> Définition & Enjeux</h2>
+                <div class="glass-card">
                     <p class="text-secondary fs-5 mb-0">
-                        C'est un processus continu qui consiste à surveiller les évolutions techniques et les innovations du marché. Pour un futur développeur <strong>SLAM</strong>, elle est vitale pour anticiper les outils de demain, optimiser ses méthodes de travail et garantir la pérennité des solutions logicielles créées.
+                        La veille technologique est une stratégie de surveillance des innovations. Pour un développeur <strong>SLAM</strong>, elle permet d'anticiper l'évolution des outils d'automatisation et de comprendre comment intégrer ces nouvelles solutions dans une architecture logicielle robuste, évolutive et sécurisée.
                     </p>
                 </div>
             </div>
@@ -98,105 +202,60 @@
     </section>
 
     <section class="mb-5" data-aos="fade-up">
-        <div class="row align-items-center">
-            <div class="col-lg-10 mx-auto text-center">
-                <span class="badge bg-dark text-info border border-info px-3 py-2 mb-3">SUJET SÉLECTIONNÉ</span>
-                <h2 class="text-white fw-bold display-5">Le Low-Code / No-Code : <br><span class="text-info">Menace ou opportunité pour le développeur ?</span></h2>
-                <p class="text-secondary fs-5 mt-4">
-                    L'utilisation d'outils comme <strong>FlutterFlow, Bubble ou PowerApps</strong> explose en entreprise. Mon étude analyse si ces solutions vont remplacer le développement classique ou si elles vont devenir des alliés pour accélérer la transformation numérique.
-                </p>
+        <div class="row align-items-center text-center">
+            <div class="col-lg-10 mx-auto">
+                <span class="badge bg-dark text-info border border-info px-3 py-2 mb-3">PROBLÉMATIQUE</span>
+                <h2 class="text-white fw-bold display-6">Le No-Code : <br><span class="text-info">Complémentarité ou remplacement du développement traditionnel ?</span></h2>
             </div>
         </div>
     </section>
 
     <section class="mb-5" data-aos="fade-up">
-        <h2 class="text-white mb-4"><span class="text-info">02.</span> Comment j'ai procédé ?</h2>
+        <h2 class="text-white mb-4"><span class="text-info">02.</span> Méthodologie de Veille</h2>
         <div class="row g-4">
             <div class="col-md-6">
                 <div class="step-card">
-                    <h4 class="text-white"><i class="bi bi-funnel me-2 text-info"></i> Centralisation (Start.me)</h4>
-                    <p class="text-secondary">J'ai centralisé mes sources sur <strong>Start.me</strong>. Cet outil me permet de regrouper sur une seule page mes favoris, mes notes et mes flux RSS pour un accès instantané.</p>
+                    <h4 class="text-white"><i class="bi bi-funnel me-2 text-info"></i> Collecte & Agrégation</h4>
+                    <p class="text-secondary">Pour organiser ma veille, j'ai mis en place un tableau de bord personnalisé via la plateforme <strong>Start.me</strong> Cet outil me permet de centraliser mes sources denses et de structurer mon bureau virtuel de manière thématique. J'y intègre notamment des références d'articles spécifiques à mon sujet technologique, ainsi que des flux RSS pour automatiser la réception des dernières actualités médiatiques en temps réel.".</p>
                 </div>
             </div>
-            <div class="col-md-6">
-                <div class="step-card">
-                    <h4 class="text-white"><i class="bi bi-rss me-2 text-info"></i> Flux RSS & Alertes</h4>
-                    <p class="text-secondary">Mise en place de flux RSS automatisés sur <em>Le Monde Informatique</em>, <em>L'Usine Digitale</em> et <em>Medium</em> avec des mots-clés ciblés (No-Code, DevOps, API).</p>
-                </div>
-            </div>
-            <div class="col-12 mt-4 text-center">
-                <div class="dashboard-mockup p-5">
-                    <i class="bi bi-layout-text-window-reverse text-info display-1 mb-3"></i>
-                    <h4 class="text-white">Dashboard de Veille Nathan</h4>
-                    <p class="text-secondary">Visualisation de mes flux RSS en temps réel via l'interface Start.me</p>
-                </div>
+            
             </div>
         </div>
     </section>
 
     <section class="mb-5" data-aos="fade-up">
-        <h2 class="text-white mb-4"><span class="text-info">03.</span> Points clés et Sources</h2>
+        <h2 class="text-white mb-4"><span class="text-info">03.</span> Analyse Thématique (Points Clés)</h2>
         <div class="row g-4">
             <div class="col-lg-4">
                 <div class="project-card-premium h-100">
-                    <div class="icon-wrapper"><i class="bi bi-lightning-charge"></i></div>
-                    <h4 class="text-white fw-bold">Vitesse de production</h4>
-                    <p class="text-secondary small">Le No-Code permet de livrer des applications 5 à 10 fois plus vite, idéal pour les prototypes et les outils internes.</p>
-                    <a href="https://www.usine-digitale.fr/no-code/" target="_blank" class="source-tag">
-                        <i class="bi bi-box-arrow-up-right me-1"></i> Lire l'article (Usine Digitale)
+                    <div class="icon-wrapper"><i class="bi bi-speedometer2"></i></div>
+                    <h4 class="text-white fw-bold">Accélération du Time-to-Market</h4>
+                    <p class="text-secondary small">Le No-Code permet de livrer des MVPs (Minimum Viable Products) en un temps record. Pour le développeur, c'est un atout majeur pour valider rapidement des interfaces utilisateur avant de concevoir un back-end sur mesure.</p>
+                    <a href="https://www.gartner.com/en/newsroom/press-releases/2022-12-13-gartner-forecasts-worldwide-low-code-development-technologies-market-to-grow-20-percent-in-2023" target="_blank" class="source-tag">
+                        <i class="bi bi-file-earmark-text me-1"></i> Analyse Marché Gartner
                     </a>
                 </div>
             </div>
             <div class="col-lg-4">
                 <div class="project-card-premium h-100">
-                    <div class="icon-wrapper"><i class="bi bi-shield-lock"></i></div>
-                    <h4 class="text-white fw-bold">Limites de sécurité</h4>
-                    <p class="text-secondary small">Le "Shadow IT" (applications créées hors contrôle DSI) pose des risques majeurs de sécurité et de conformité RGPD.</p>
-                    <a href="https://www.lemondeinformatique.fr/actualites/lire-le-no-code-entre-promesses-et-realites-85421.html" target="_blank" class="source-tag">
-                        <i class="bi bi-box-arrow-up-right me-1"></i> Lire sur Le Monde Info
+                    <div class="icon-wrapper"><i class="bi bi-shield-exclamation"></i></div>
+                    <h4 class="text-white fw-bold">Gouvernance et Shadow IT</h4>
+                    <p class="text-secondary small">Le risque majeur réside dans la création d'applications par des services non techniques sans supervision. Cela peut engendrer des failles de sécurité et des défauts de conformité RGPD que le développeur doit savoir auditer.</p>
+                    <a href="https://www.lemagit.fr/conseil/Comment-encadrer-le-No-Code-pour-eviter-le-Shadow-IT" target="_blank" class="source-tag">
+                        <i class="bi bi-shield-lock me-1"></i> Dossier Shadow IT LeMagIT
                     </a>
                 </div>
             </div>
             <div class="col-lg-4">
                 <div class="project-card-premium h-100">
-                    <div class="icon-wrapper"><i class="bi bi-diagram-3"></i></div>
-                    <h4 class="text-white fw-bold">Mutation du métier</h4>
-                    <p class="text-secondary small">Le développeur SLAM évolue vers un rôle d'expert en intégration de systèmes et en gestion d'architectures API complexes.</p>
-                    <a href="https://www.programmez.com/actualites/le-no-code-ne-remplacera-pas-les-developpeurs-mais-il-va-changer-leur-metier-32456" target="_blank" class="source-tag">
-                        <i class="bi bi-box-arrow-up-right me-1"></i> Source : Programmez!
+                    <div class="icon-wrapper"><i class="bi bi-cpu"></i></div>
+                    <h4 class="text-white fw-bold">Évolution vers l'Architecte API</h4>
+                    <p class="text-secondary small">Le développeur se détache des tâches de codage répétitives pour devenir un architecte de solutions. Son rôle consiste désormais à interconnecter les outils No-Code à des services complexes via des API REST ou GraphQL.</p>
+                    <a href="https://www.cio-online.com/actualites/lire-le-low-codeno-code-ne-tue-pas-les-developpeurs-il-les-libere-14402.html" target="_blank" class="source-tag">
+                        <i class="bi bi-journal-text me-1"></i> Analyse CIO Online
                     </a>
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="row g-3 text-center py-5 border-top border-secondary border-opacity-25" data-aos="zoom-in">
-        <div class="col-6 col-md-3">
-            <div class="icon-box-footer">
-                <i class="bi bi-rocket-takeoff text-info display-5"></i>
-                <h6 class="text-white mt-3 fw-bold">Agilité</h6>
-                <p class="small text-secondary mb-0">Livraison continue</p>
-            </div>
-        </div>
-        <div class="col-6 col-md-3">
-            <div class="icon-box-footer">
-                <i class="bi bi-shield-check text-info display-5"></i>
-                <h6 class="text-white mt-3 fw-bold">Gouvernance</h6>
-                <p class="small text-secondary mb-0">Sécurité maîtrisée</p>
-            </div>
-        </div>
-        <div class="col-6 col-md-3">
-            <div class="icon-box-footer">
-                <i class="bi bi-plug text-info display-5"></i>
-                <h6 class="text-white mt-3 fw-bold">Connectivité</h6>
-                <p class="small text-secondary mb-0">Focus sur les API</p>
-            </div>
-        </div>
-        <div class="col-6 col-md-3">
-            <div class="icon-box-footer">
-                <i class="bi bi-mortarboard text-info display-5"></i>
-                <h6 class="text-white mt-3 fw-bold">Expertise</h6>
-                <p class="small text-secondary mb-0">Conseil technique</p>
             </div>
         </div>
     </section>
@@ -206,7 +265,7 @@
 <footer class="container py-4 border-top border-secondary opacity-50">
     <div class="row">
         <div class="col-md-6 small text-white">© 2026 HORNECKER Nathan // Veille Technologique BTS SIO</div>
-        <div class="col-md-6 text-md-end text-white small">Sources : Start.me / RSS / Presse IT</div>
+        <div class="col-md-6 text-md-end text-white small">Outils : Start.me / RSS / FlutterFlow</div>
     </div>
 </footer>
 
@@ -217,7 +276,6 @@
 <script>
     AOS.init({ duration: 800, once: true });
     
-    // Background animé (Identique à ton portfolio)
     const canvas = document.querySelector('#canvas-bg');
     const renderer = new THREE.WebGLRenderer({ canvas, alpha: true });
     const scene = new THREE.Scene();
