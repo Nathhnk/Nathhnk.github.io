@@ -38,7 +38,7 @@
             pointer-events: none;
         }
 
-        /* --- NAVBAR HARMONISÉE --- */
+        /* --- NAVBAR --- */
         .navbar {
             background: rgba(3, 7, 18, 0.7) !important;
             backdrop-filter: blur(20px) saturate(180%);
@@ -76,10 +76,7 @@
             width: 15px;
         }
 
-        .nav-active-fix {
-            color: var(--text-dim) !important;
-        }
-
+        /* L'indicateur reste ici pour montrer la section active */
         .nav-active-fix::after {
             width: 15px !important;
         }
@@ -99,7 +96,7 @@
         .dropdown-item { color: #f8fafc; padding: 10px 20px; transition: 0.3s; }
         .dropdown-item:hover { background: rgba(74, 207, 238, 0.15); color: var(--accent); }
 
-        /* --- CONTENU PROJETS --- */
+        /* --- CARDS --- */
         .project-card-premium {
             background: linear-gradient(165deg, var(--glass-heavy) 0%, rgba(255,255,255,0.01) 100%);
             border: 1px solid var(--border);
@@ -151,7 +148,6 @@
         }
 
         .shadow-cyan { box-shadow: 0 0 20px rgba(74, 207, 238, 0.4); }
-
         main { position: relative; z-index: 10; }
     </style>
 </head>
@@ -171,7 +167,7 @@
             <ul class="navbar-nav ms-auto gap-4 align-items-center">
                 <li><a class="nav-link custom-link" href="index.html">Accueil</a></li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link custom-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                    <a class="nav-link custom-link dropdown-toggle nav-active-fix" href="#" role="button" data-bs-toggle="dropdown">
                         À propos de moi
                     </a>
                     <ul class="dropdown-menu">
@@ -180,7 +176,7 @@
                     </ul>
                 </li>
                 <li><a class="nav-link custom-link" href="experience.html">Stage</a></li>
-                <li><a class="nav-link custom-link nav-active-fix" href="projets.html">Projets</a></li>
+                <li><a class="nav-link custom-link" href="projets.html">Projets</a></li>
                 <li><a class="nav-link custom-link" href="veilles.html">veilles technologique</a></li>
                 <li><a href="contact.html" class="btn btn-info rounded-pill px-4 shadow-cyan fw-bold text-dark" style="background-color: #4acfee !important; border:none;">Contact</a></li>
             </ul>
