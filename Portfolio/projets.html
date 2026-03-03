@@ -63,7 +63,7 @@
             transition: var(--transition);
             transform: translateX(-50%);
             border-radius: 2px;
-            opacity: 0; /* Caché par défaut */
+            opacity: 0;
         }
 
         .custom-link:hover {
@@ -75,14 +75,14 @@
             opacity: 1;
         }
 
-        /* FORCE L'AFFICHAGE DU TRAIT (Même sans survol) */
+        /* FORCE LE TRAIT SUR "À PROPOS" */
         .nav-active-fix {
             color: var(--text-dim) !important; 
         }
 
         .nav-active-fix::after {
             width: 15px !important;
-            opacity: 1 !important; /* Force la visibilité */
+            opacity: 1 !important;
             background: var(--accent) !important;
         }
 
@@ -111,7 +111,7 @@
 
         .shadow-cyan { box-shadow: 0 0 20px rgba(74, 207, 238, 0.4); }
 
-        /* --- PROJETS STYLES --- */
+        /* --- PROJETS --- */
         .project-card-premium {
             background: linear-gradient(165deg, rgba(255,255,255,0.07), rgba(255,255,255,0.01));
             border: 1px solid var(--border);
@@ -119,6 +119,8 @@
             padding: 45px;
             transition: var(--transition);
             height: 100%;
+            display: flex;
+            flex-direction: column;
         }
 
         .project-card-premium:hover {
@@ -208,16 +210,46 @@
     </div>
 
     <div class="row g-4">
-        <div class="col-lg-12" data-aos="fade-up">
+        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
             <div class="project-card-premium">
                 <div class="icon-wrapper"><i class="bi bi-display"></i></div>
                 <h3 class="fw-bold">Portfolio Professionnel</h3>
                 <p class="text-secondary">
-                    Création de mon site personnel avec Bootstrap et Three.js.
+                    Création de mon site personnel avec Bootstrap et Three.js pour un rendu moderne et fluide.
                 </p>
-                <span class="badge-tech-v2">HTML</span>
-                <span class="badge-tech-v2">CSS</span>
-                <span class="badge-tech-v2">JS</span>
+                <div class="mt-auto">
+                    <span class="badge-tech-v2">HTML</span>
+                    <span class="badge-tech-v2">CSS</span>
+                    <span class="badge-tech-v2">JS</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+            <div class="project-card-premium">
+                <div class="icon-wrapper"><i class="bi bi-file-earmark-person"></i></div>
+                <h3 class="fw-bold">CV Numérique</h3>
+                <p class="text-secondary">
+                    Développement d'un CV interactif permettant une navigation dynamique dans mon parcours.
+                </p>
+                <div class="mt-auto">
+                    <span class="badge-tech-v2">HTML</span>
+                    <span class="badge-tech-v2">CSS</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+            <div class="project-card-premium">
+                <div class="icon-wrapper"><i class="bi bi-patch-question"></i></div>
+                <h3 class="fw-bold">Quizz JS</h3>
+                <p class="text-secondary">
+                    Application de questionnaire interactive développée en JavaScript pur pour tester des connaissances.
+                </p>
+                <div class="mt-auto">
+                    <span class="badge-tech-v2">JavaScript</span>
+                    <span class="badge-tech-v2">Logic</span>
+                </div>
             </div>
         </div>
     </div>
