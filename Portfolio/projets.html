@@ -65,18 +65,26 @@
             transition: var(--transition);
             transform: translateX(-50%);
             border-radius: 2px;
-            opacity: 0; /* Caché par défaut */
+            opacity: 0;
         }
 
         .custom-link:hover { color: var(--text-main) !important; }
         .custom-link:hover::after { width: 15px; opacity: 1; }
 
-        /* --- CORRECTION : TRAIT FIXÉ SUR À PROPOS --- */
-        .nav-active-fix { color: var(--text-main) !important; }
+        /* --- CORRECTION : TRAIT FIXÉ MAIS COULEUR IDENTIQUE AUX AUTRES --- */
+        .nav-active-fix { 
+            color: var(--text-dim) !important; /* Reste gris comme les autres */
+        }
+
         .nav-active-fix::after { 
             width: 15px !important; 
             opacity: 1 !important; 
             background: var(--accent) !important; 
+        }
+
+        /* Effet hover pour le lien actif quand même */
+        .nav-active-fix:hover {
+            color: var(--text-main) !important;
         }
 
         .dropdown-toggle::after { display: none !important; }
@@ -92,7 +100,7 @@
         .dropdown-item { color: #f8fafc; padding: 10px 20px; transition: 0.3s; }
         .dropdown-item:hover { background: rgba(74, 207, 238, 0.15); color: var(--accent); }
 
-        /* --- CARDS (TON STYLE PRÉFÉRÉ) --- */
+        /* --- CARDS (TON STYLE D'ORIGINE) --- */
         .project-card-premium {
             background: linear-gradient(165deg, var(--glass-heavy) 0%, rgba(255,255,255,0.01) 100%);
             border: 1px solid var(--border);
