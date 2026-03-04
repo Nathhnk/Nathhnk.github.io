@@ -19,7 +19,6 @@
             background: radial-gradient(circle at center, #111827 0%, #030712 100%);
         }
         
-        /* Dropdown Menu Style */
         .dropdown-menu {
             background: rgba(17, 24, 39, 0.95);
             backdrop-filter: blur(10px);
@@ -30,27 +29,26 @@
         .dropdown-item { color: #f8fafc; padding: 10px 20px; transition: 0.3s; }
         .dropdown-item:hover { background: rgba(74, 207, 238, 0.15); color: #4acfee; }
 
-        /* Photo & Card Corrections */
-        .glass-card {
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(15px);
-            border: 1px solid rgba(74, 207, 238, 0.2);
-            border-radius: 24px;
+        /* Style épuré : Juste la photo */
+        .profile-section {
             display: inline-block;
-            width: 100%;
-        }
-        
-        .rounded-circle {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: rgba(74, 207, 238, 0.1);
+            text-align: center;
         }
 
-        .rounded-circle img {
+        .rounded-circle-container {
+            width: 220px;
+            height: 220px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin: 0 auto 20px;
+            border: 4px solid #4acfee;
+            box-shadow: 0 0 30px rgba(74, 207, 238, 0.4);
+        }
+
+        .rounded-circle-container img {
             width: 100%;
             height: 100%;
-            object-fit: cover; /* Remplit le cercle sans déformer */
+            object-fit: cover;
         }
 
         .text-glow {
@@ -118,8 +116,8 @@
         </div>
 
         <div class="col-lg-5 d-none d-lg-block text-center" data-aos="fade-left">
-            <div class="glass-card p-4 floating-anim">
-                <div class="rounded-circle overflow-hidden mx-auto border border-info border-4 mb-4" style="width: 220px; height: 220px; box-shadow: 0 0 25px rgba(74, 207, 238, 0.3);">
+            <div class="profile-section floating-anim">
+                <div class="rounded-circle-container">
                     <img src="photoProfil.png.png" alt="Nathan Hornecker">
                 </div>
                 <h2 class="h4 text-white">Nathan Hornecker</h2>
@@ -150,10 +148,8 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 <script>
-    // Initialisation AOS
     AOS.init({ duration: 800, once: true });
 
-    // Background Three.js
     const canvas = document.querySelector('#canvas-bg');
     const renderer = new THREE.WebGLRenderer({ canvas, alpha: true });
     const scene = new THREE.Scene();
