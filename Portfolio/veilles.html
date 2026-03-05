@@ -25,6 +25,13 @@
             --glass: rgba(255, 255, 255, 0.03);
         }
 
+        body {
+            font-family: 'Plus+Jakarta+Sans', sans-serif;
+            color: var(--text-main);
+            background-color: #030712;
+            overflow-x: hidden;
+        }
+
         #canvas-bg {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -67,8 +74,7 @@
         .custom-link:hover { color: var(--text-main) !important; }
         .custom-link:hover::after { width: 15px; opacity: 1; }
 
-        /* CORRECTION : LE TRAIT RESTE SUR À PROPOS */
-        .nav-active-fix { color: var(--text-dim) !important; }
+        .nav-active-fix { color: var(--text-main) !important; }
         .nav-active-fix::after { 
             width: 15px !important; 
             opacity: 1 !important; 
@@ -172,7 +178,7 @@
             <ul class="navbar-nav ms-auto gap-4 align-items-center">
                 <li><a class="nav-link custom-link" href="index.html">Accueil</a></li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link custom-link nav-active-fix" href="#" role="button" data-bs-toggle="dropdown">
+                    <a class="nav-link custom-link" href="#" role="button" data-bs-toggle="dropdown">
                         À propos de moi
                     </a>
                     <ul class="dropdown-menu">
@@ -182,7 +188,7 @@
                 </li>
                 <li><a class="nav-link custom-link" href="experience.html">Stage</a></li>
                 <li><a class="nav-link custom-link" href="projets.html">Projets</a></li>
-                <li><a class="nav-link custom-link" href="veilles.html">veille technologique</a></li>
+                <li><a class="nav-link custom-link nav-active-fix" href="veilles.html">Veille technologique</a></li>
                 <li><a href="contact.html" class="btn btn-info rounded-pill px-4 shadow-cyan fw-bold text-dark" style="background-color: #4acfee !important; border:none;">Contact</a></li>
             </ul>
         </div>
@@ -221,10 +227,10 @@
     <section class="mb-5" data-aos="fade-up">
         <h2 class="text-white mb-4"><span class="text-info">02.</span> Méthodologie de Veille</h2>
         <div class="row g-4">
-            <div class="col-md-6">
+            <div class="col-md-12">
                 <div class="step-card">
                     <h4 class="text-white"><i class="bi bi-funnel me-2 text-info"></i> Collecte & Agrégation</h4>
-                    <p class="text-secondary">Pour organiser ma veille, j'ai mis en place un tableau de bord personnalisé via la plateforme <strong>Start.me</strong> Cet outil me permet de centraliser mes sources denses et de structurer mon bureau virtuel de manière thématique. J'y intègre notamment des références d'articles spécifiques à mon sujet technologique, ainsi que des flux RSS pour automatiser la réception des dernières actualités médiatiques en temps réel.".</p>
+                    <p class="text-secondary">Pour organiser ma veille, j'ai mis en place un tableau de bord personnalisé via la plateforme <strong>Start.me</strong>. Cet outil me permet de centraliser mes sources et de structurer mon bureau virtuel de manière thématique. J'y intègre notamment des références d'articles spécifiques, ainsi que des flux RSS pour automatiser la réception des dernières actualités en temps réel.</p>
                 </div>
             </div>
         </div>
@@ -244,14 +250,11 @@
                 </div>
             </div>
             <div class="col-lg-4">
-    <div class="col-lg-4">
-    <div class="project-card-premium h-100">
-        <div class="icon-wrapper"><i class="bi bi-shield-exclamation"></i></div>
-        <h4 class="text-white fw-bold">Gouvernance et Shadow IT</h4>
-        <p class="text-secondary small">L'accessibilité du No-Code multiplie les risques de Shadow IT. Le rôle du développeur évolue vers la mise en place d'un "Centre d'Excellence" pour garantir la sécurité et la conformité des données de l'entreprise.</p>
-    </div>
-</div>
-</div>
+                <div class="project-card-premium h-100">
+                    <div class="icon-wrapper"><i class="bi bi-shield-exclamation"></i></div>
+                    <h4 class="text-white fw-bold">Gouvernance et Shadow IT</h4>
+                    <p class="text-secondary small">L'accessibilité du No-Code multiplie les risques de Shadow IT. Le rôle du développeur évolue vers la mise en place d'un "Centre d'Excellence" pour garantir la sécurité et la conformité des données de l'entreprise.</p>
+                </div>
             </div>
             <div class="col-lg-4">
                 <div class="project-card-premium h-100">
@@ -311,5 +314,3 @@
 
 </body>
 </html>
-
-
